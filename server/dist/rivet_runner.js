@@ -1,15 +1,12 @@
 import { runGraphInFile, startDebuggerServer, NodeDatasetProvider } from '@ironclad/rivet-node';
-//import fetch from 'node-fetch';
-//import playSound from 'play-sound';
 import { textToSpeech } from './text_to_speech.js';
-//import { promises as fs } from 'fs';
 import { transcribeAudioFromMic } from './speech_input.js';
 import dotenv from 'dotenv';
 dotenv.config();
 import { EventEmitter } from 'events';
 EventEmitter.defaultMaxListeners = 100;
 // project file path without file ending
-const project = './memGPT_036_andy';
+const project = './memGPT';
 const graph = 'yebVxRtmTpuGTOzVJ-b2j';
 const openAiKey = process.env.OPEN_AI_KEY;
 async function loadDatasets() {

@@ -10,7 +10,7 @@ import { EventEmitter } from 'events';
 EventEmitter.defaultMaxListeners = 100;
 
 // project file path without file ending
-const project = './memGPT_036_andy';
+const project = './memGPT';
 const graph = 'yebVxRtmTpuGTOzVJ-b2j';
 
 const openAiKey = process.env.OPEN_AI_KEY;
