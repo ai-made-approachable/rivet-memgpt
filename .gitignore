@@ -1,0 +1,7 @@
+.env
+*.mp3
+*.wav
+*.aac
+.vscode
+/server/src/archive/*
+/server/dist/archive/*

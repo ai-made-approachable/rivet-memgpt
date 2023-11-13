@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@gradio/client": "^0.8.0",
+    "@ironclad/rivet-node": "^1.12.0",
+    "dotenv": "^16.3.1",
+    "eventsource": "^2.0.2",
+    "eventsource-polyfill": "^0.9.6",
+    "fluent-ffmpeg": "^2.1.2",
+    "jsdom": "^22.1.0",
+    "mic": "^2.1.2",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.17.4",
+    "play-sound": "^1.1.6"
+  },
+  "devDependencies": {
+    "@types/play-sound": "^1.1.2",
+    "typescript": "^5.2.2"
+  },
+  "name": "rivet_app",
+  "version": "1.0.0",
+  "main": "rivet_runner.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
