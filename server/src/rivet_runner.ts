@@ -1,5 +1,4 @@
 // test.ts
-import * as Rivet from '@ironclad/rivet-node';
 import { runGraphInFile, startDebuggerServer, NodeDatasetProvider } from '@ironclad/rivet-node';
 import { textToSpeech } from './text_to_speech.js';
 import { transcribeAudioFromMic } from './speech_input.js';
