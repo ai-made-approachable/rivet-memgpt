@@ -1,5 +1,5 @@
 # rivet-memgpt
-This project intends to rebuild the general MemGPT idea in Rivet, which is a no-code solution that allows to create complex graphs handling AI applications.
+This project intends to rebuild the general [MemGPT](https://memgpt.ai/) idea in Rivet, which is a no-code solution that allows to create complex graphs handling AI applications.
 The goal is not to recreate it exactely, but to add the main functionalities and then extend/improve upon them.
 
 ## About the project
