@@ -1,22 +1,22 @@
 import express from "express";
 const app = express();
 app.use(express.json());
-const PORT = 8080;
+const PORT = 8085;
 app.listen(PORT, () => console.log('Listening on http://localhost:' + PORT));
 app.post('/message', async (req, res) => {
     const body = req.body;
     if (!body || !body.message) {
-        res.status(418).send({ message: "No message provided" });
+        return res.status(418).send({ message: "No message provided" });
     }
     if (!body.start_conversation) {
         body.start_conversation = false;
     }
     try {
         const result = await mockResult();
-        res.status(200).send({ status: result });
+        return res.status(200).send({ status: result });
     }
     catch (error) {
-        res.status(500).send({ message: "An error occured" });
+        return res.status(500).send({ message: "An error occured" });
     }
 });
 function mockResult() {

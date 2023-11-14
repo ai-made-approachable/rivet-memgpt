@@ -5,4 +5,6 @@
 .vscode
 /server/src/archive/*
 /server/dist/archive/*
+/app/archive/*
 *.rivet-data
+.DS_Store
