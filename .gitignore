@@ -5,3 +5,4 @@
 .vscode
 /server/src/archive/*
 /server/dist/archive/*
+*.rivet-data

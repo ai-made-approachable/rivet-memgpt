@@ -788,58 +788,70 @@ data:
       metadata:
         description: ""
         id: 3zuodc4-Mn4TBdA36cefU
-        name: B. functions/response_handling/wait_for_audio_replay
+        name: B. functions/response_handling/get_user_reply
       nodes:
+        '[CDiwlSLa70XWm11VbP-hO]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Coalesce" S7Fk1JdOmij-onvEom2p2/input1
+          visualData: 1171.2004550490224/330.0995231694811/155/1698//
+        '[Cp-4ud0-roxAOfPUISCbO]:match "Match"':
+          data:
+            cases:
+              - "true"
+          outgoingConnections:
+            - case1->"External Call" rqe7MGfwv1_avrOQfDC6v/arguments
+          visualData: 428.7923192468216/156.58614297098572/280/1706//
         '[IWtXh2pq3nppHVh7KAM9M]:extractObjectPath "Extract Object Path"':
           data:
             path: $.[0]
             usePathInput: false
           outgoingConnections:
-            - match->"If/Else" Vpa9Ehhpxi1pqGVhHtjzo/false
-          visualData: 1755.2777423245025/667.9918258941148/280/1660//
+            - match->"Coalesce" S7Fk1JdOmij-onvEom2p2/input2
+          visualData: 1579.4761228375064/650.5300971067882/280/1713//
+        '[S7Fk1JdOmij-onvEom2p2]:coalesce "Coalesce"':
+          outgoingConnections:
+            - output->"Graph Output" fpV3Qg-Ewp-v9yW0omnUa/value
+          visualData: 1522.4311394896129/261.1558912235006/180/1715//
         '[Tv7IUZowf649J29guICeH]:graphInput "Graph Input"':
           data:
             dataType: string
             id: message
             useDefaultValueInput: false
           outgoingConnections:
-            - data->"External Call" rqe7MGfwv1_avrOQfDC6v/arguments
-          visualData: 308.50068495879884/404.16405179751877/330/2/var(--node-color-4)/var(--grey-darkish)
-        '[Vpa9Ehhpxi1pqGVhHtjzo]:ifElse "If/Else"':
-          data:
-            unconnectedControlFlowExcluded: true
-          outgoingConnections:
-            - output->"Graph Output" fpV3Qg-Ewp-v9yW0omnUa/value
-          visualData: 1454.0220919408234/168.97838624843072/207.6290219859095/1665//
-        '[c1q4k8FW8BHMmUfK1JKfB]:match "Match"':
-          data:
-            cases:
-              - "false"
-          outgoingConnections:
-            - case1->"User Input" sfQmQdsByPVUp4xpYlxpQ/questions
-          visualData: 1392.2811657311604/431.97879112781493/280/1660//
+            - data->"Match" Cp-4ud0-roxAOfPUISCbO/value
+          visualData: -55.88548444327829/378.18455939684327/330/1708/var(--node-color-4)/var(--grey-darkish)
         '[dw8J6xkHDfp2dTLv8jnI4]:externalCall "External Call"':
           data:
             functionName: getUserInput
             useErrorOutput: false
             useFunctionNameInput: false
           outgoingConnections:
-            - result->"If/Else" Vpa9Ehhpxi1pqGVhHtjzo/true
-          visualData: 1059.1507827757453/403.59711294075595/180/1635//
+            - result->"If" CDiwlSLa70XWm11VbP-hO/value
+          visualData: 805.2437255613704/402.1130669766568/180/1695//
+        '[eoATt4y5bc0Wrja6vDtyz]:boolean "Bool"':
+          data:
+            value: false
+          outgoingConnections:
+            - value->"Context" o30WKfjL4W2v2wm6uCTZo/default
+          visualData: -328.55493608602353/141.2603975005066/160/1712//
         '[fpV3Qg-Ewp-v9yW0omnUa]:graphOutput "Graph Output"':
           data:
             dataType: string
             id: user_input
-          visualData: 1789.0638423291846/135.137655723661/330/1667//
+          visualData: 1790.3124130053832/155.9544726821833/330/1716//
         '[o30WKfjL4W2v2wm6uCTZo]:context "Context"':
           data:
             dataType: boolean
+            defaultValue: "false"
             id: run_from_node
-            useDefaultValueInput: false
+            useDefaultValueInput: true
           outgoingConnections:
-            - data->"If/Else" Vpa9Ehhpxi1pqGVhHtjzo/if
-            - data->"Match" c1q4k8FW8BHMmUfK1JKfB/input
-          visualData: 999.7385284023817/137.04117853171198/330/1665//
+            - data->"If" CDiwlSLa70XWm11VbP-hO/if
+            - data->"If" xtdRsvgMApi7mrAc3e-6B/if
+            - data->"Match" Cp-4ud0-roxAOfPUISCbO/input
+          visualData: -70.11529030995516/126.578793552804/330/1710//
         '[rqe7MGfwv1_avrOQfDC6v]:externalCall "External Call"':
           data:
             functionName: text_to_speech
@@ -847,22 +859,28 @@ data:
             useFunctionNameInput: false
           outgoingConnections:
             - result->"External Call" dw8J6xkHDfp2dTLv8jnI4/arguments
-          visualData: 744.8574083715489/400.8442077033474/180/1612//
+          visualData: 531.5316072669616/398.1311592340699/180/1702//
         '[sfQmQdsByPVUp4xpYlxpQ]:userInput "User Input"':
           data:
             prompt: This is an example question?
             useInput: true
           outgoingConnections:
             - output->"Extract Object Path" IWtXh2pq3nppHVh7KAM9M/object
-          visualData: 1390.189561261799/727.2251802037517/280/1660//
+          visualData: 1223.7240448896396/680.6544702663023/280/1691//
+        '[xtdRsvgMApi7mrAc3e-6B]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - falseOutput->"User Input" sfQmQdsByPVUp4xpYlxpQ/questions
+          visualData: 814.3043142863992/652.4865907949109/155/1711//
         '[yhGAqdntWrkFUMEl_042q]:graphInput "Graph Input"':
           data:
             dataType: string
             id: inner_thought_and_message
             useDefaultValueInput: false
           outgoingConnections:
-            - data->"Match" c1q4k8FW8BHMmUfK1JKfB/value
-          visualData: 306.809171195453/716.5186258684887/330/1668/var(--node-color-4)/var(--grey-darkish)
+            - data->"If" xtdRsvgMApi7mrAc3e-6B/value
+          visualData: -48.75604818365949/668.8999545011079/330/1709/var(--node-color-4)/var(--grey-darkish)
     58feeDMBbRTnzveWL6PnP:
       metadata:
         description: ""
@@ -1052,6 +1070,7 @@ data:
             cache: true
             enableFunctionUse: true
             frequencyPenalty: 0
+            headers: []
             maxTokens: 1024
             model: gpt-4
             overrideModel: ""
@@ -1352,7 +1371,7 @@ data:
 
               The only way to communicate with the user is by calling the 'send_message' function!
           outgoingConnections:
-            - output->"Graph Output" iAQ9Qznn_hxMkvKnPEOxt/value
+            - output->"Set Global" puIMtbNsLAIUyYZ0h5AWh/value
           visualData: 1173.021405956411/-140.0067625816928/330/1002/var(--node-color-2)/var(--grey-darkish)
         '[AheVp0Appa-rF7QsTvOMB]:number "Number"':
           data:
@@ -1481,11 +1500,6 @@ data:
               - Communicate with 'send_message' function.
               - Avoid generic phrases; strive for personalized interaction.
           visualData: 725.337162799998/-135.74346786945682/330/992/var(--node-color-2)/var(--grey-darkish)
-        '[iAQ9Qznn_hxMkvKnPEOxt]:graphOutput "Graph Output"':
-          data:
-            dataType: string
-            id: system_prompt
-          visualData: 2065.180043690704/82.25947118283148/330/1001/var(--node-color-4)/var(--grey-darkish)
         '[p0b1s2qkcp97DvmOGd4O0]:text "Ethan"':
           data:
             text: >-
@@ -1511,6 +1525,12 @@ data:
           outgoingConnections:
             - output->"Object" HQIPUtqB4gr1l9FVX6o7G/model
           visualData: 928.6529137189809/683.3784373804251/330/1010/var(--node-color-2)/var(--grey-darkish)
+        '[puIMtbNsLAIUyYZ0h5AWh]:setGlobal "Set Global"':
+          data:
+            dataType: string
+            id: system_prompt
+            useIdInput: false
+          visualData: 1692.4409298748508/69.93865285991416/230/1019//
         '[qS5hin1xetcTTmk5XSuuu]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -2360,6 +2380,12 @@ data:
             - data->"Extract Object Path" TGbZ-_3sI6NSdGNHmWwZt/object
             - data->"If" isZttV720N4oEZYyLd4xZ/value
           visualData: 168.1133951481406/590.6839963488654/330/1187/var(--node-color-3)/var(--grey-darkish)
+        '[3KopnCvlQuWvPSMiJzneP]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Graph Output" ZB7K-TOdeE_0jCvhBUF7w/value
+          visualData: 1367.7549847687276/1500.8264025164553/205/1213//
         '[8XC3cxO6z5DjHmx1UOFm7]:graphOutput "Graph Output"':
           data:
             dataType: string
@@ -2389,13 +2415,20 @@ data:
           outgoingConnections:
             - value->"IS_ERROR" eUQG8gTk_3BsXPFaVjNr9/true
           visualData: 2061.5150712996906/944.537447899043/160/1185//
+        '[HxzgyzoWo-Gf0txStcKfY]:text "Text"':
+          data:
+            text: ""
+          outgoingConnections:
+            - output->"If/Else" 3KopnCvlQuWvPSMiJzneP/false
+          visualData: 1147.964469554813/1600.2221132182895/129.80863900898203/1214//
         '[QH7RFJDU4JLzdGw_25kas]:extractObjectPath "Extract Object Path"':
           data:
             path: $.id
             usePathInput: false
           outgoingConnections:
-            - match->"Graph Output" ZB7K-TOdeE_0jCvhBUF7w/value
-          visualData: 696.4802248156539/1414.2686344363801/280/1203//
+            - match->"If/Else" 3KopnCvlQuWvPSMiJzneP/if
+            - match->"If/Else" 3KopnCvlQuWvPSMiJzneP/true
+          visualData: 776.276781294591/1509.464526376165/280/1209//
         '[R4qMp0EdpnLjrU5iLBPmR]:extractObjectPath "Extract Object Path"':
           data:
             path: $.arguments
@@ -2413,6 +2446,13 @@ data:
             - match->"Graph Output" 8XC3cxO6z5DjHmx1UOFm7/value
             - match->"If" isZttV720N4oEZYyLd4xZ/if
           visualData: 661.1046031163602/588.339444022985/280/1179//
+        '[WAAHMpBXyjLLF1CNrVuBV]:comment "Comment"':
+          data:
+            backgroundColor: rgba(0,0,0,0.05)
+            color: rgba(255,255,255,1)
+            height: 493.6045913614171
+            text: "##### Extract tool-call id"
+          visualData: 586.5886950275527/1356.6326250194286/1381.7675584068295/1206//
         '[ZB7K-TOdeE_0jCvhBUF7w]:graphOutput "Graph Output"':
           data:
             dataType: string
@@ -3833,15 +3873,6 @@ data:
           outgoingConnections:
             - data->"Subgraph" zC7Prj6RzzxJstc1THz5i/persona
           visualData: 587.6966115837207/1192.5259097486617/330/972/var(--node-color-3)/var(--grey-darkish)
-        '[2SxPRi8eXFsJ68yarJMW-]:graphInput "Graph Input"':
-          data:
-            dataType: string
-            editor: string
-            id: system_prompt
-            useDefaultValueInput: false
-          outgoingConnections:
-            - data->"Text" 1OoV-H01pREySRjkeDy-9/main_instructions
-          visualData: 1423.1874340796667/193.34266552383005/330/975/var(--node-color-3)/var(--grey-darkish)
         '[2hcmvIsufOL_4WMRHOtr-]:boolean "Bool"':
           data:
             value: true
@@ -3853,7 +3884,7 @@ data:
             graphId: n6Kq8tuqFbt9tHjQljaU5
             useAsGraphPartialOutput: false
             useErrorOutput: false
-          visualData: 1847.9339984948726/467.852184387339/330/871/var(--node-color-6)/var(--grey-darkish)
+          visualData: 1813.524833749867/134.70890753796502/330/980/var(--node-color-6)/var(--grey-darkish)
         '[8ANCWdOQZrwJygXivA28o]:prompt "Prompt"':
           data:
             enableFunctionCall: false
@@ -3929,6 +3960,16 @@ data:
             useAsGraphPartialOutput: false
             useErrorOutput: false
           visualData: 1113.5467449735213/2222.2959557821196/330/971/var(--node-color-6)/var(--grey-darkish)
+        '[Yyriwvif6nvHCDqGs3vz7]:getGlobal "Get Global"':
+          data:
+            dataType: string
+            id: system_prompt
+            onDemand: true
+            useIdInput: false
+            wait: false
+          outgoingConnections:
+            - value->"Text" 1OoV-H01pREySRjkeDy-9/main_instructions
+          visualData: 1190.1435455794003/174.5740302083724/230/981//
         '[_OWwb7Rgvt98rJEIGK3bk]:graphInput "Graph Input"':
           data:
             dataType: string
@@ -3986,12 +4027,6 @@ data:
             - human->"Subgraph" GTuJ5DeqVsVpM1QPUo8ZR/human
             - persona->"Subgraph" GTuJ5DeqVsVpM1QPUo8ZR/persona
           visualData: 1018.7591857831103/938.791385825665/330/853/var(--node-color-6)/var(--grey-darkish)
-    YJjvrDhzXr6_ntsJN7Cd3:
-      metadata:
-        description: ""
-        id: YJjvrDhzXr6_ntsJN7Cd3
-        name: Untitled Graph
-      nodes: {}
     YZ9S5QYzk54YbCPfZttR9:
       metadata:
         description: ""
@@ -4537,6 +4572,12 @@ data:
             dataType: string
             id: send_message_content
           visualData: 1419.923463783183/318.15053247959037/330/116/var(--node-color-3)/var(--grey-darkish)
+    acu53TxgknmEeJ8XIAI62:
+      metadata:
+        description: ""
+        id: acu53TxgknmEeJ8XIAI62
+        name: Untitled Graph
+      nodes: {}
     af8urMCg4mVlogO6QKnax:
       metadata:
         description: ""
@@ -5345,7 +5386,7 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" 6LevfFbEUpuy9nhEVxp8m/message3
             - output->"Assemble Prompt" BYYMoRjItNzZk0xmJnqdE/message3
-          visualData: 2351.884311632273/1475.877981320712/280/1303//
+          visualData: 2338.105588000579/1442.196656887682/280/1665//
         '[9e7dG6HyJgSs9nIS3qOwU]:ifElse "If/Else"':
           outgoingConnections:
             - output->"Array" VSnXLQ3iee0qkhsBddZCK/input1
@@ -5398,34 +5439,17 @@ data:
             - data->"Pop" JvoneRXg0zSNmm3czTF3i/array
             - data->"Subgraph" KToCGXSaEJoCibemr7bDY/messages
           visualData: 373.2629786858185/414.6839226734239/330/1329/var(--node-color-3)/var(--grey-darkish)
-        '[FnFHBmNrzhk8arXcTQwio]:subGraph "Subgraph"':
-          data:
-            graphId: 3zuodc4-Mn4TBdA36cefU
-            useAsGraphPartialOutput: false
-            useErrorOutput: false
-          outgoingConnections:
-            - user_input->"Extract Regex" Nh_9cpfQjAzHDNEgCcipU/input
-            - user_input->"Match" pWbWx5OJqrfGdYMc_xEhi/value
-            - user_input->"Subgraph" mXNN2N-u1aQfWNuk0UjS3/user_prompt
-            - user_input->"Subgraph" unTEkKnILAchqZPpQ-1qs/message
-          visualData: 1151.741266606953/2514.860182894034/330/1659/var(--node-color-6)/var(--grey-darkish)
         '[GaYvBxq6wYw-VSiXVWv7b]:boolean "Bool"':
           data:
             value: false
           outgoingConnections:
             - value->"If/Else" ziP1mmIG6MrVxggm8dZiJ/true
-          visualData: 1601.9164819429186/2180.721639868179/160/1642//
+          visualData: 1624.5708068571355/2156.6514196468233/160/1676//
         '[GrbFXYBuXjGT7d9rwoM-1]:graphOutput "Graph Output"':
           data:
             dataType: boolean
             id: continue
-          visualData: 2266.7153346780524/2001.859546312776/330/1452/var(--node-color-3)/var(--grey-darkish)
-        '[H0tJDUEXGeEQt-gVeQftu]:text "Text"':
-          data:
-            text: user
-          outgoingConnections:
-            - output->"Subgraph" unTEkKnILAchqZPpQ-1qs/role
-          visualData: 319.6201470335555/1777.0640615387076/135.89046161250747/1526//
+          visualData: 2216.096676337197/2071.4618943351347/330/1722/var(--node-color-3)/var(--grey-darkish)
         '[HtoxQWvkmb1DzY_YEAUEs]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -5463,9 +5487,9 @@ data:
         '[JvoneRXg0zSNmm3czTF3i]:pop "Pop"':
           outgoingConnections:
             - lastItem->"Code" plkNSnH-kalFQFEAX_wUQ/message
-            - lastItem->"Extract Object Path" ff-khfzbrkYRUxvjcjI9e/object
             - lastItem->"Extract Object Path" hVIyu8tkziO3rJ6vAnBrc/object
             - lastItem->"Extract Object Path" ytoIgvjiHabRZj4g2KPfd/object
+            - lastItem->"If" rm0tQT_1fEu2bBf0ZwAqV/value
             - lastItem->"If/Else" Vwh2geKT1srds4KXRGYkZ/false
             - lastItem->"Stringify arguments" f8kZ0RJz9QxV3nzqntjqi/input
             - restOfArray->"Assemble Prompt" 40MPqoNcpWMJ6y2CUrwRl/message1
@@ -5491,7 +5515,7 @@ data:
             useRegexInput: false
           outgoingConnections:
             - succeeded->"If/Else" ziP1mmIG6MrVxggm8dZiJ/if
-          visualData: 1209.920795708032/2014.463290784872/280/1641//
+          visualData: 1169.2807314577042/2043.2992272743393/280/1672//
         '[PmhOynR4LMDiDnx3MqLLE]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -5526,9 +5550,18 @@ data:
           data:
             backgroundColor: rgba(0,0,0,0.05)
             color: rgba(255,255,255,1)
-            height: 572.1337230636445
+            height: 449.1241274156812
             text: "##### Ask user if continue_with_user was true and create prompt"
-          visualData: 1098.6612031085108/1317.0606845480515/1170.3056350297902/1334//
+          visualData: 1098.8366967420643/1451.414200509514/1167.2971195532095/1723//
+        '[RyL-Z8TmfsHIj2_k-W8CG]:subGraph "Subgraph"':
+          data:
+            graphId: qHWe_KljMN6N5WruTzhrb
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - user_message->"Extract Regex" Nh_9cpfQjAzHDNEgCcipU/input
+            - user_prompt->"Assemble Prompt" BYYMoRjItNzZk0xmJnqdE/message4
+          visualData: 1490.9317500963036/1612.8916337943579/330/1731//
         '[Tu1IlPtsGZaSLiEmMapb9]:comment "Comment"':
           data:
             backgroundColor: rgba(0,0,0,0.05)
@@ -5583,28 +5616,12 @@ data:
             useAsGraphPartialOutput: false
             useErrorOutput: false
           visualData: 632.6539943683168/1346.6348303802542/330/1355/var(--node-color-6)/var(--grey-darkish)
-        '[YPEPBT4kd_TOFuLXQVrFF]:comment "Comment"':
-          data:
-            backgroundColor: rgba(0,0,0,0.05)
-            color: rgba(255,255,255,1)
-            height: 303.26530023970327
-            text: Get prompt from node.js application, if it is running there
-          visualData: 1097.252365094838/2410.611436759821/1607.3291222184175/1638//
         '[Ygo7dmPpmyouk7CaJNAke]:subGraph "Subgraph"':
           data:
             graphId: KTVh7Vy4HfjkVzYNjwUjV
             useAsGraphPartialOutput: false
             useErrorOutput: false
           visualData: 5075.807206833669/763.1537468700138/330/1504/var(--node-color-6)/var(--grey-darkish)
-        '[_RcOSWRUEBoktQpJI33Vr]:prompt "Prompt"':
-          data:
-            enableFunctionCall: false
-            promptText: "{{input}}"
-            type: user
-            useTypeInput: false
-          outgoingConnections:
-            - output->"Assemble Prompt" BYYMoRjItNzZk0xmJnqdE/message4
-          visualData: 1942.7317021520817/1546.9617327539045/280/1541//
         '[_ZaZwIk56eAx_fhyZB0XD]:match "Match"':
           data:
             cases:
@@ -5628,8 +5645,7 @@ data:
         '[c73C-FhvHc-kbASjDId12]:coalesce "Coalesce"':
           outgoingConnections:
             - output->"Prompt" 9O4qsGUsXb3BTCIzBR8EV/function_response
-            - output->"Subgraph" FnFHBmNrzhk8arXcTQwio/message
-          visualData: 2676.8830656393725/955.7110587727226/180/1327/var(--node-color-2)/var(--grey-darkish)
+          visualData: 2717.0543316502853/952.1665353011715/180/1726/var(--node-color-2)/var(--grey-darkish)
         '[cir01LM-RPClWLOlYjz35]:ifElse "If/Else"':
           outgoingConnections:
             - output->"Coalesce" c73C-FhvHc-kbASjDId12/input2
@@ -5672,14 +5688,6 @@ data:
             - output->"Assemble Prompt" BYYMoRjItNzZk0xmJnqdE/message2
             - output->"Assemble Prompt" If3n_iJhtTglMCU421rWi/message2
           visualData: 2749.1948600368205/1356.6172260280541/230/1325//
-        '[ff-khfzbrkYRUxvjcjI9e]:extractObjectPath "Extract Object Path"':
-          data:
-            path: $.message
-            usePathInput: false
-          outgoingConnections:
-            - match->"Match" _ZaZwIk56eAx_fhyZB0XD/input
-            - match->"Text" ikNQg4_KQTgtwbJGrbeWI/inner_thoughts
-          visualData: 1206.397762354287/1430.7476027833682/280/1453//
         '[fhuTtYizSjL_oT5s9kPj_]:text "Text"':
           data:
             text: smth
@@ -5693,11 +5701,11 @@ data:
             useAsGraphPartialOutput: false
             useErrorOutput: false
           outgoingConnections:
+            - continue_with_user->"If" rm0tQT_1fEu2bBf0ZwAqV/if
             - continue_with_user->"If/Else" 9e7dG6HyJgSs9nIS3qOwU/if
-            - continue_with_user->"Match" pWbWx5OJqrfGdYMc_xEhi/input
             - function_result->"If/Else" cir01LM-RPClWLOlYjz35/false
+            - message_to_user->"Subgraph" RyL-Z8TmfsHIj2_k-W8CG/message_to_user
             - message_to_user->"Subgraph" n1HRKdAZF5ZG0RZAD66rz/message
-            - message_to_user->"Text" ikNQg4_KQTgtwbJGrbeWI/message
           visualData: 2246.6460851246475/945.9197199806049/330/1225/var(--node-color-6)/var(--grey-darkish)
         '[hVIyu8tkziO3rJ6vAnBrc]:extractObjectPath "Extract Object Path"':
           data:
@@ -5707,15 +5715,6 @@ data:
             - match->"If/Else" Vwh2geKT1srds4KXRGYkZ/if
             - match->"Subgraph" 9Arv-wjpugbC4-Fo02Jq3/input
           visualData: 733.9773602450827/681.1217783897574/280/934//
-        '[ikNQg4_KQTgtwbJGrbeWI]:text "Text"':
-          data:
-            text: |-
-              {{inner_thoughts}}
-
-              {{message}}
-          outgoingConnections:
-            - output->"Subgraph" FnFHBmNrzhk8arXcTQwio/inner_thought_and_message
-          visualData: 1146.6827849743936/1653.3401883689703/330/1567//
         '[koPfHHEEfNrPZcMb7jayD]:object "Non stringified arguments"':
           data:
             jsonTemplate: >-
@@ -5806,31 +5805,18 @@ data:
 
               4. Optional user input
           visualData: 3038.82502127142/1473.7057039748317/531.3207454571761/1382//
-        '[mXNN2N-u1aQfWNuk0UjS3]:subGraph "Subgraph"':
-          data:
-            graphId: HvmERo8EeKjjN2UBLa8ld
-            useAsGraphPartialOutput: false
-            useErrorOutput: false
-          visualData: 537.488886801904/1935.3673440498453/330/1518/var(--node-color-6)/var(--grey-darkish)
         '[n1HRKdAZF5ZG0RZAD66rz]:subGraph "Subgraph"':
           data:
             graphId: 3c9cyZV4uDhqdPnC57xwV
             useAsGraphPartialOutput: false
             useErrorOutput: false
-          visualData: 2662.200473870738/1773.614639951842/330/1536/var(--node-color-6)/var(--grey-darkish)
-        '[pWbWx5OJqrfGdYMc_xEhi]:match "Match"':
-          data:
-            cases:
-              - "true"
-          outgoingConnections:
-            - case1->"Prompt" _RcOSWRUEBoktQpJI33Vr/input
-          visualData: 1603.108750952461/1421.3927272793971/280/1270//
+          visualData: 2679.004192555566/1797.6199523587397/330/1728/var(--node-color-6)/var(--grey-darkish)
         '[pWsB0M4dwlbLAbMI2I9px]:boolean "Bool"':
           data:
             value: true
           outgoingConnections:
             - value->"If/Else" ziP1mmIG6MrVxggm8dZiJ/false
-          visualData: 1824.2283804518613/2181.161965063338/160/1644//
+          visualData: 1895.0231458087896/2208.063975898971/160/1675//
         '[plkNSnH-kalFQFEAX_wUQ]:code "Code"':
           data:
             code: |-
@@ -5858,6 +5844,12 @@ data:
             height: 690.821515375728
             text: "##### Log message as intention if not empty"
           visualData: 162.68499962019163/969.427540911875/927.0941096189068/1408//
+        '[rm0tQT_1fEu2bBf0ZwAqV]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Subgraph" RyL-Z8TmfsHIj2_k-W8CG/last_message
+          visualData: 1194.681153031875/1645.8619001166635/155/1730//
         '[su1xYxVWJhL3WuA-zpkDr]:object "send_message"':
           data:
             jsonTemplate: >-
@@ -5914,13 +5906,7 @@ data:
             - is_error->"If/Else" --cmu6aSL48F8VFcjLgaf/if
             - is_error->"If/Else" cir01LM-RPClWLOlYjz35/if
             - tool_call_id->"Prompt" 9O4qsGUsXb3BTCIzBR8EV/name
-          visualData: 2236.2746000564175/613.8995081725379/330/1227/var(--node-color-6)/var(--grey-darkish)
-        '[unTEkKnILAchqZPpQ-1qs]:subGraph "Subgraph"':
-          data:
-            graphId: 3c9cyZV4uDhqdPnC57xwV
-            useAsGraphPartialOutput: false
-            useErrorOutput: false
-          visualData: 532.6865990426707/1690.1383256094223/330/1639/var(--node-color-6)/var(--grey-darkish)
+          visualData: 2217.3704748748114/552.4611013323184/330/1727/var(--node-color-6)/var(--grey-darkish)
         '[ytoIgvjiHabRZj4g2KPfd]:extractObjectPath "Extract Object Path"':
           data:
             path: $.message
@@ -5928,6 +5914,7 @@ data:
           outgoingConnections:
             - match->"Compare" 9EOQ8CbBxMsWhVGMZBRvS/a
             - match->"If/Else" 3z0jo6QeAZWYUh8hqRnd0/false
+            - match->"Match" _ZaZwIk56eAx_fhyZB0XD/input
           visualData: 650.4732763814881/1084.7657344677405/280/1354//
         '[z7jV3IE4PVTygvSTdMG-T]:graphOutput "Graph Output"':
           data:
@@ -5952,7 +5939,7 @@ data:
         '[ziP1mmIG6MrVxggm8dZiJ]:ifElse "If/Else"':
           outgoingConnections:
             - output->"Graph Output" GrbFXYBuXjGT7d9rwoM-1/value
-          visualData: 1793.9426002368607/1963.639252554064/205/1646//
+          visualData: 1873.2327374366203/1969.302833782618/205/1674//
         '[zylNf2fO7O1uyKVQz1Tv3]:text "Text"':
           data:
             text: >-
@@ -5968,12 +5955,6 @@ data:
             - output->"Match" _ZaZwIk56eAx_fhyZB0XD/value
             - output->"Prompt" 6CW1LoCmlMC3pXLRdo3W4/input
           visualData: 1154.9257634953747/1106.8858178127537/330/1539//
-    dKnF96DX46IzwMrowHAX0:
-      metadata:
-        description: ""
-        id: dKnF96DX46IzwMrowHAX0
-        name: Untitled Graph
-      nodes: {}
     ecUojCZRRhACebULFDUxh:
       metadata:
         description: ""
@@ -6788,7 +6769,7 @@ data:
         '[vg9e5HFLsESmpx8THlaVJ]:appendToDataset "Append to Dataset"':
           data:
             datasetId: memgpt_meta
-          visualData: 1559.231636071611/708.636691439158/280/898//
+          visualData: 1577.1401252642074/663.2685188179137/280/899//
         '[y9fPojTU8j2SYUxRu7J0q]:graphInput "Graph Input"':
           data:
             dataType: string
@@ -6928,6 +6909,93 @@ data:
           outgoingConnections:
             - output->"Chat" CTty5ihMZbpId-Iq4i2MI/systemPrompt
           visualData: 987.1697838519287/249.8127196019328/280/108//
+    qHWe_KljMN6N5WruTzhrb:
+      metadata:
+        description: ""
+        id: qHWe_KljMN6N5WruTzhrb
+        name: B. functions/response_handling/continue_with_user
+      nodes:
+        '[-C_jT6DsAQi9Wni7fojBH]:graphOutput "Graph Output"':
+          data:
+            dataType: string
+            id: user_message
+          visualData: 2790.2243452533285/715.3590828073312/330/1730/var(--node-color-4)/var(--grey-darkish)
+        '[3BfORAgRwQktk5OC-fdtP]:subGraph "Subgraph"':
+          data:
+            graphId: HvmERo8EeKjjN2UBLa8ld
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          visualData: 1333.0741583248878/830.1976575616645/330/1705/var(--node-color-6)/var(--grey-darkish)
+        '[3_kTtjOOD30wP5vNHOC-N]:extractObjectPath "Extract Object Path"':
+          data:
+            path: $.message
+            usePathInput: false
+          outgoingConnections:
+            - match->"Text" KcgjlBRMEUOyTcMEFki-z/inner_thoughts
+          visualData: 1146.5871539922036/448.7195033553386/280/1718//
+        '[8gRPTQJv7K8UcBfDMTlWZ]:subGraph "Subgraph"':
+          data:
+            graphId: 3c9cyZV4uDhqdPnC57xwV
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          visualData: 1999.657736771486/793.7953680647776/330/1723/var(--node-color-6)/var(--grey-darkish)
+        '[AE-00SSCscYTgRLiZlWG_]:graphOutput "Graph Output"':
+          data:
+            dataType: object
+            id: user_prompt
+          visualData: 2790.224345253329/449.17709870921254/330/1727/var(--node-color-4)/var(--grey-darkish)
+        '[BxMclt-QknTtqaPHmjAEq]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            id: message_to_user
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Subgraph" jWL41osaRWPtpv1pPjUqD/message
+            - data->"Text" KcgjlBRMEUOyTcMEFki-z/message
+          visualData: 697.592900622886/609.8798335504115/330/1724/var(--node-color-3)/var(--grey-darkish)
+        '[Ds3BYlkDhiwoyGZBC_tbs]:graphInput "Graph Input"':
+          data:
+            dataType: object
+            id: last_message
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Extract Object Path" 3_kTtjOOD30wP5vNHOC-N/object
+          visualData: 694.2258595753505/345.28849930465344/330/1728/var(--node-color-3)/var(--grey-darkish)
+        '[IMEHeas-NnsnOPsYIQjfl]:prompt "Prompt"':
+          data:
+            enableFunctionCall: false
+            promptText: "{{input}}"
+            type: user
+            useTypeInput: false
+          outgoingConnections:
+            - output->"Graph Output" AE-00SSCscYTgRLiZlWG_/value
+          visualData: 2383.484799489359/432/280/1689//
+        '[KcgjlBRMEUOyTcMEFki-z]:text "Text"':
+          data:
+            text: |-
+              {{inner_thoughts}}
+
+              {{message}}
+          outgoingConnections:
+            - output->"Subgraph" jWL41osaRWPtpv1pPjUqD/inner_thought_and_message
+          visualData: 1532.904332655644/426.88267377256045/330/1718//
+        '[jWL41osaRWPtpv1pPjUqD]:subGraph "Subgraph"':
+          data:
+            graphId: 3zuodc4-Mn4TBdA36cefU
+            useAsGraphPartialOutput: false
+            useErrorOutput: false
+          outgoingConnections:
+            - user_input->"Graph Output" -C_jT6DsAQi9Wni7fojBH/value
+            - user_input->"Prompt" IMEHeas-NnsnOPsYIQjfl/input
+            - user_input->"Subgraph" 3BfORAgRwQktk5OC-fdtP/user_prompt
+            - user_input->"Subgraph" 8gRPTQJv7K8UcBfDMTlWZ/message
+          visualData: 1948.0186186399778/447.65445534937226/330/1722/var(--node-color-6)/var(--grey-darkish)
+        '[tCP81S6kxHo0LccaaDxlY]:text "Text"':
+          data:
+            text: user
+          outgoingConnections:
+            - output->"Subgraph" 8gRPTQJv7K8UcBfDMTlWZ/role
+          visualData: 1740.666881764768/834.1762682072563/135.89046161250747/1704//
     rT1XXNN6T2XlfYbaawG4J:
       metadata:
         description: ""

@@ -24,13 +24,12 @@ async function loadDatasets() {
 }
 
 const debuggerServer = startDebuggerServer({
-  port: 8081
+  // port: 8081
 });
 
-
 const datasetProvider = await loadDatasets();
-await runGraphInFile(project + '.rivet-project', { 
-  graph: graph, 
+await runGraphInFile(project + '.rivet-project', {
+  graph: graph,
   datasetProvider: datasetProvider,
   remoteDebugger: debuggerServer,
   inputs: {},
@@ -56,7 +55,7 @@ await runGraphInFile(project + '.rivet-project', {
         value: response
       };
     },
-  },  
+  },
   onUserEvent: {},
   openAiKey: openAiKey
 } as any);
