@@ -5,7 +5,7 @@ The goal is not to recreate it exactely, but to add the main functionalities and
 ## About the project
 Currently the project has multiple parts
 1. The rivet graph itself: "memGPT.rivet-project". This file can be run in the [Rivet App](https://rivet.ironcladapp.com/) itself and contains most of the functionalities.
-2. This graph can also be run via a node.js/typeScript application in /server/. That allows it to be hosted as a backend and can also be used to add more functionalities.
+2. This graph can also be run via a node.js/typeScript application in /server/. That allows it to be hosted as a backend and can also be used to add more functionalities. To get this running you will need to set OPEN_AI_KEY in your .env file in the workspace directory
 3. There are plans to create a proper web-interface for the chat. There are some ideas for that in /app using python and gradio. But this is currently not functional
 
 ## Current status
