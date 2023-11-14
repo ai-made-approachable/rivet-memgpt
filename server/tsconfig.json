@@ -11,5 +11,5 @@
       "@root/*": ["../../src/*"]
     }
   },
-  "include": ["dist/src/**/*", "src/*", "src/archive/function_test.ts", "src/archive/rivet_runner_backup.ts"]
+  "include": ["src/*"]
 }
