@@ -824,7 +824,7 @@ data:
           visualData: -55.88548444327829/378.18455939684327/330/1708/var(--node-color-4)/var(--grey-darkish)
         '[dw8J6xkHDfp2dTLv8jnI4]:externalCall "External Call"':
           data:
-            functionName: getUserInput
+            functionName: get_user_input
             useErrorOutput: false
             useFunctionNameInput: false
           outgoingConnections:
@@ -2415,12 +2415,6 @@ data:
           outgoingConnections:
             - value->"IS_ERROR" eUQG8gTk_3BsXPFaVjNr9/true
           visualData: 2061.5150712996906/944.537447899043/160/1185//
-        '[HxzgyzoWo-Gf0txStcKfY]:text "Text"':
-          data:
-            text: ""
-          outgoingConnections:
-            - output->"If/Else" 3KopnCvlQuWvPSMiJzneP/false
-          visualData: 1147.964469554813/1600.2221132182895/129.80863900898203/1214//
         '[QH7RFJDU4JLzdGw_25kas]:extractObjectPath "Extract Object Path"':
           data:
             path: $.id
@@ -2445,6 +2439,7 @@ data:
           outgoingConnections:
             - match->"Graph Output" 8XC3cxO6z5DjHmx1UOFm7/value
             - match->"If" isZttV720N4oEZYyLd4xZ/if
+            - match->"If/Else" 3KopnCvlQuWvPSMiJzneP/false
           visualData: 661.1046031163602/588.339444022985/280/1179//
         '[WAAHMpBXyjLLF1CNrVuBV]:comment "Comment"':
           data:

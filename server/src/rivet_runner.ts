@@ -14,6 +14,10 @@ const graph = 'yebVxRtmTpuGTOzVJ-b2j';
 
 const openAiKey = process.env.OPEN_AI_KEY;
 
+/**
+ * Loads datasets from a file with the given project name.
+ * @returns A dataset provider object.
+ */
 async function loadDatasets() {
   try {
     const datasetProvider = await NodeDatasetProvider.fromDatasetsFile(project + '.rivet-data');
@@ -22,12 +26,12 @@ async function loadDatasets() {
     console.error('Error loading datasets:', err);
   }
 }
+const datasetProvider = await loadDatasets();
 
 const debuggerServer = startDebuggerServer({
   // port: 8081
 });
 
-const datasetProvider = await loadDatasets();
 await runGraphInFile(project + '.rivet-project', {
   graph: graph,
   datasetProvider: datasetProvider,
@@ -38,7 +42,7 @@ await runGraphInFile(project + '.rivet-project', {
     run_from_node: true
   },
   externalFunctions: {
-    getUserInput: async function main(): Promise<{ type: string, value: string }> {
+    get_user_input: async function main(): Promise<{ type: string, value: string }> {
       const apiKey: string = openAiKey;
       const transcript: string = await transcribeAudioFromMic(apiKey);
       console.log(transcript);
