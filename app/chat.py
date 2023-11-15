@@ -52,13 +52,14 @@ def request_api(message, start_conversation):
         "start_conversation": start_conversation
     }
     json_data = json.dumps(data)
+    print(json_data)
     response = requests.post(
         "http://localhost:8085/message",
         data=json_data,
         headers={"Content-Type": "application/json"},
     )
     # print("This is the response: " + str(response.json()))
-    return response.json().get('status', {}).get('message', '')
+    return response.json().get('message', {})
 
 # Gradio Chat Interface
 # ---------------
