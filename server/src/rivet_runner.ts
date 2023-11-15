@@ -20,7 +20,7 @@ const openAiKey = process.env.OPEN_AI_KEY;
  */
 async function loadDatasets() {
   try {
-    const datasetProvider = await NodeDatasetProvider.fromDatasetsFile(project + '.rivet-data');
+    const datasetProvider = await NodeDatasetProvider.fromDatasetsFile(project + '.rivet-data', { save: true });
     return datasetProvider;
   } catch (err) {
     console.error('Error loading datasets:', err);
