@@ -16,6 +16,9 @@ app.post('/message', async (req, res) => {
     if (!body.start_conversation) {
         body.start_conversation = false;
     }
+    if (body.message === "/exit") {
+        res.status(200).send({ "message": "The user has logged out" });
+    }
     try {
         const result = await getResponse(body.start_conversation, body.message).then(chatHistory => {
             //console.log(chatHistory.value.response);

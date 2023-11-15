@@ -68,6 +68,7 @@ with gr.Blocks() as chat:
         """
         # Rivet MemGPT Chat
         ### Note: Press "Start Conversation" first before you start chatting
+        Write /exit to properly end the conversation (AI will then create a summary and remember informations)
         """
     )
     start = gr.Button("Start conversation")
