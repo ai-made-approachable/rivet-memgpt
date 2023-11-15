@@ -1,4 +1,9 @@
 import express from "express";
+import { getResponse } from "./rivet_runner.js";
+import { textToSpeech } from './text_to_speech.js';
+import dotenv from 'dotenv';
+dotenv.config();
+const openAiKey = process.env.OPEN_AI_KEY;
 const app = express();
 app.use(express.json());
 const PORT = 8085;
@@ -6,27 +11,26 @@ app.listen(PORT, () => console.log('Listening on http://localhost:' + PORT));
 app.post('/message', async (req, res) => {
     const body = req.body;
     if (!body || !body.message) {
-        return res.status(418).send({ message: "No message provided" });
+        res.status(418).send({ message: "No message provided" });
     }
     if (!body.start_conversation) {
         body.start_conversation = false;
     }
     try {
-        const result = await mockResult();
-        return res.status(200).send({ status: result });
+        const result = await getResponse(body.start_conversation, body.message).then(chatHistory => {
+            //console.log(chatHistory.value.response);
+            // Voice output of AI response
+            textToSpeech(chatHistory.value.response, openAiKey);
+            return chatHistory.value.response;
+        }).catch(error => {
+            console.error('Error running project file:', error);
+        });
+        res.status(200).send({ message: result });
     }
     catch (error) {
-        return res.status(500).send({ message: "An error occured" });
+        res.status(500).send({ message: "An error occured" });
     }
 });
-function mockResult() {
-    return new Promise((resolve, reject) => {
-        // Simulate async operation
-        setTimeout(() => {
-            resolve({ message: 'Hello, how can I help you?' });
-        }, 2000);
-    });
-}
 // Input/Output examples
 // Store the chat-messages object in server app or pass it around from chat to server app and back!?
 const input = {
