@@ -10,7 +10,7 @@ Currently the project has multiple parts
 
 ## Current status
 - Most of the MemGPT features are integrated (core_memory, recall_memory, archival_memory) and it works well with gpt-4
-- Using the /server/ application there is voice in-/and output
+- Using the /server/ backend application + the /app/ frontend application, a chat interface can be used
 
 ## Next steps
 - [ ] Change graph behavior, so that new gpt-4-turbo and newer gpt-3-turbo versions, will work better (maybe add inner thoughts as a function instead if they can do multi function calling (send_message + send_inner_thoughts) consistently
