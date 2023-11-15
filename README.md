@@ -14,6 +14,6 @@ Currently the project has multiple parts
 
 ## Next steps
 - [ ] Change graph behavior, so that new gpt-4-turbo and newer gpt-3-turbo versions, will work better (maybe add inner thoughts as a function instead if they can do multi function calling (send_message + send_inner_thoughts) consistently
-- [ ] Create a proper chat-interface including voice-input. It needs to have an API so LLM responses from Rivet can be pushed in
+- [x] Create a proper chat-interface including voice-input. It needs to have an API so LLM responses from Rivet can be pushed in
 - [ ] Allow the usage of multiple data stores and swapping them
 - [ ] Create a full setup (personas, human, data sources to be used, gpt model) procedure
