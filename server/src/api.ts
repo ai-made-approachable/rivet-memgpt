@@ -27,9 +27,9 @@ app.post('/message', async (req, res) => {
     }
     try {
         const result = await getResponse(body.start_conversation, body.message).then(chatHistory => {
-            //console.log(chatHistory.value.response);
+            console.log(chatHistory.value.response);
             // Voice output of AI response
-            textToSpeech(chatHistory.value.response, openAiKey);
+            //textToSpeech(chatHistory.value.response, openAiKey);
             return chatHistory.value.response;
         }).catch(error => {
             console.error('Error running project file:', error);
@@ -39,19 +39,3 @@ app.post('/message', async (req, res) => {
         res.status(500).send({ message: "An error occured" })
     }
 })
-
-// Input/Output examples
-// Store the chat-messages object in server app or pass it around from chat to server app and back!?
-const input =
-{
-    "message": {
-        "type": "user",
-        "message": "Hallo"
-    },
-    "start_conversation": true
-}
-
-const output =
-{
-    "response": "Hallo, wie kann ich dir helfen?"
-}

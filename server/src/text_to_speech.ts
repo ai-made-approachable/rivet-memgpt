@@ -2,8 +2,9 @@ import fs from 'fs';
 import fetch from 'node-fetch';
 import playSound from 'play-sound';
 
-export const textToSpeech = async (data: any, openAiKey: string) => {
+export const textToSpeech = async (data: any, openAiKey: string, getFile: boolean) => {
   const player = playSound();
+  const format = 'mp3'
   const response = await fetch('https://api.openai.com/v1/audio/speech', {
     method: 'POST',
     headers: {
@@ -15,20 +16,30 @@ export const textToSpeech = async (data: any, openAiKey: string) => {
       model: 'tts-1',
       voice: 'alloy',
       speed: 1,
-      response_format: 'mp3'
+      response_format: format
     })
   });
   const audioBuffer = await response.arrayBuffer();
   // Write the audioBuffer to a file
-  await fs.promises.writeFile('audio.mp3', Buffer.from(audioBuffer));
-  // Play the audio file and return a Promise that resolves when the audio finishes playing
-  return new Promise((resolve, reject) => {
-    player.play('audio.mp3', (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(true);
-      }
+  await fs.promises.writeFile('audio.' + format, Buffer.from(audioBuffer));
+  if(!getFile) {
+    // Play the audio file and return a Promise that resolves when the audio finishes playing
+    return new Promise((resolve, reject) => {
+      player.play('audio'+ format, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(true);
+        }
+      });
     });
-  });
+  }
+  else {
+    const data = await fs.promises.readFile('audio.' + format);
+    // Convert the buffer to a 16-bit int array
+    const audioData = new Int16Array(data.buffer);
+
+    // Return the sample rate and the audio data
+    return [44100, audioData];
+  }
 }

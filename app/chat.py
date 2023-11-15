@@ -24,9 +24,18 @@ def respond(message, chat_history, audio, start_conversation=False):
     if not message:
         return None, chat_history, None
     bot_message = request_api(message, start_conversation)
+
+    # playback audio
+    response_content = text_to_speech(bot_message)
+    voice = response_content.content
+
+    # Save the voice data to a file
+    with open('voice.mp3', 'wb') as f:
+        f.write(voice)
+
     chat_history.append((message, bot_message))
     # print(chat_history)
-    return "", chat_history, None
+    return "", chat_history, None, 'voice.mp3'
 
 # Get message either from text or audio
 def retrieve_message(message, audio):
@@ -44,6 +53,14 @@ def transcribe_audio(audio):
     transcript = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
     # print(transcript.text)
     return transcript.text
+
+def text_to_speech(bot_message):
+    response = client.audio.speech.create(
+        model="tts-1",
+        voice = "alloy",
+        input = bot_message
+    )
+    return response
 
 # Request node js api to get response from rivet
 def request_api(message, start_conversation):
@@ -81,9 +98,12 @@ with gr.Blocks() as chat:
             audio = gr.Audio(sources=["microphone"], label="Speak", type="filepath")
         
         submit = gr.Button("Submit", scale=3)
-        submit.click(fn=respond, inputs=[msg, chatbot, audio], outputs=[msg, chatbot, audio])
+        
+    ai = gr.Audio(format='mp3', interactive = False, container = True, value=None, label="AI response (audio)", autoplay=True)
     
+    # Events
+    submit.click(fn=respond, inputs=[msg, chatbot, audio], outputs=[msg, chatbot, audio, ai])
     msg.submit(respond, [msg, chatbot, audio], [msg, chatbot, audio])
-    start.click(fn=on_load, inputs=[msg, chatbot, audio], outputs=[msg, chatbot, audio])
+    start.click(fn=on_load, inputs=[msg, chatbot, audio], outputs=[msg, chatbot, audio, ai])
 
 chat.launch(share=False, show_api=False)
