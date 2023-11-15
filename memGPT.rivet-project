@@ -7507,9 +7507,9 @@ data:
           data:
             jsonTemplate: |-
               {
-                "id": "startup_with_send_message_gpt35",
                 "name": "send_message",
-                "arguments": "{\n  \"message\": \"Hello, is anyone there?\"\n}"
+                "arguments": "{\n  \"message\": \"Hello, is anyone there?\"\n}",
+                "id": "startup_with_send_message_gpt35"
               }
           outgoingConnections:
             - output->"If" ra_VxGJwjgV5epP8pFbAS/value
