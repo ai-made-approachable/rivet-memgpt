@@ -11,5 +11,5 @@
       "@root/*": ["../../src/*"]
     }
   },
-  "include": ["src/*"]
+  "include": ["src/*", "src/archive/text_to_speech.ts", "src/archive/speech_input.ts"]
 }
