@@ -21,8 +21,6 @@ app.post('/message', async (req, res) => {
     try {
         const result = await getResponse(body.start_conversation, body.message).then(chatHistory => {
             console.log(chatHistory.value.response);
-            // Voice output of AI response
-            //textToSpeech(chatHistory.value.response, openAiKey);
             return chatHistory.value.response;
         }).catch(error => {
             console.error('Error running project file:', error);
