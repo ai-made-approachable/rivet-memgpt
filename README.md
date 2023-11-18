@@ -2,6 +2,9 @@
 This project intends to rebuild the general [MemGPT](https://memgpt.ai/) idea in Rivet, which is a no-code solution that allows to create complex graphs handling AI applications.
 The goal is not to recreate it exactely, but to add the main functionalities and then extend/improve upon them.
 
+## Update
+Project is currently being rebuild from the scratch: https://github.com/Makadoro/rivet_memgpt_v2
+
 ## About the project
 Currently the project has multiple parts
 1. The rivet graph itself: "memGPT.rivet-project". This file can be run in the [Rivet App](https://rivet.ironcladapp.com/) itself and contains most of the functionalities.
